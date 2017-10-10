@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-
+// Fixing OPENNLP-1095
 package opennlp.tools.util.normalizer;
 
 import java.util.regex.Pattern;
@@ -28,8 +28,10 @@ public class EmojiCharSequenceNormalizer implements CharSequenceNormalizer {
     return INSTANCE;
   }
 
+  //Adding emojis becuase of which error is occurring.
+  //All Reg-ex documented in README of https://github.com/deepika087/emoji-regex
   private static final Pattern EMOJI_REGEX =
-      Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+      Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF-\\1F469-\\231A]+");
 
   public CharSequence normalize (CharSequence text) {
     String modified = EMOJI_REGEX.matcher(text).replaceAll(" ");

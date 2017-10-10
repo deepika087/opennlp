@@ -40,4 +40,21 @@ public class EmojiCharSequenceNormalizerTest {
         "Any funny text goes here    ", normalizer.normalize(s));
   }
 
+  public EmojiCharSequenceNormalizer normalizer = EmojiCharSequenceNormalizer.getInstance();
+
+  //Test case input taken from
+  //https://issues.apache.org/jira/projects/OPENNLP/issues/OPENNLP-1095?
+  @Test
+  public void seqOfEmoji() throws Exception {
+
+    String s = new StringBuilder()
+        .appendCodePoint(0x1F61B)
+        .appendCodePoint(0x1F61B)
+        .appendCodePoint(0x1F61B)
+        .appendCodePoint(0x1F61B)
+        .toString();
+
+    Assert.assertEquals("emoji", normalizer.normalize(s));
+  }
+
 }
